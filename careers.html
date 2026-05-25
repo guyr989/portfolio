@@ -353,18 +353,34 @@
       .footer__inner { flex-direction: column; text-align: center; }
       .footer__links { justify-content: center; }
     }
+
+    /* ── Language switcher ──────────────────────────────────────── */
+    .lang-switch { display: flex; gap: .25rem; align-items: center; }
+    .lang-btn {
+      background: none; border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full); padding: .2rem .65rem;
+      font-family: var(--font-base); font-size: .8rem; font-weight: 700;
+      color: var(--color-muted-text); cursor: pointer;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .lang-btn.active,
+    .lang-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .lang-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    /* ── LTR directional overrides ──────────────────────────────── */
+    [dir="ltr"] .skip-link { right: auto; left: 1rem; }
   </style>
 </head>
 <body>
 
-  <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">דלג לתוכן הראשי</a>
 
   <!-- ── NAV ───────────────────────────────────────────────────── -->
   <header role="banner">
     <nav class="nav" aria-label="ניווט ראשי">
       <div class="container">
         <div class="nav__inner">
-          <a href="index.html" class="logo-link" aria-label="OgEnergy דף הבית">
+          <a href="index.html" class="logo-link" data-i18n-aria="nav.home_aria" aria-label="OgEnergy דף הבית">
             <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <rect width="34" height="34" rx="9" fill="#f97316"/>
               <path d="M20 5L10 19h8l-4 10 14-16h-8l4-8z" fill="#fff"/>
@@ -373,14 +389,25 @@
           </a>
 
           <ul class="nav__links" role="list">
-            <li><a href="index.html#about">אודות</a></li>
-            <li><a href="index.html#services">שירותים</a></li>
-            <li><a href="index.html#team">הצוות</a></li>
-            <li><a href="careers.html" aria-current="page">קריירה</a></li>
-            <li><a href="index.html#contact" class="nav__cta">צור קשר</a></li>
+            <li><a href="index.html#about" data-i18n="nav.about">אודות</a></li>
+            <li><a href="index.html#services" data-i18n="nav.services">שירותים</a></li>
+            <li><a href="index.html#team" data-i18n="nav.team">הצוות</a></li>
+            <li><a href="careers.html" aria-current="page" data-i18n="nav.careers">קריירה</a></li>
+            <li><a href="index.html#contact" class="nav__cta" data-i18n="nav.contact">צור קשר</a></li>
           </ul>
 
-          <button class="nav__toggle" aria-label="פתח תפריט ניווט" aria-expanded="false" aria-controls="mobile-nav">
+          <div class="lang-switch" aria-label="Language / שפה">
+            <button class="lang-btn active" data-lang="he">HE</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+
+          <button class="nav__toggle"
+            data-i18n-aria="nav.toggle_open"
+            data-i18n-open="nav.toggle_open"
+            data-i18n-close="nav.toggle_close"
+            data-open-label="פתח תפריט ניווט"
+            data-close-label="סגור תפריט ניווט"
+            aria-label="פתח תפריט ניווט" aria-expanded="false" aria-controls="mobile-nav">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <line x1="3" y1="6" x2="21" y2="6"/>
               <line x1="3" y1="12" x2="21" y2="12"/>
@@ -389,11 +416,11 @@
           </button>
         </div>
         <div class="nav__mobile" id="mobile-nav" role="list">
-          <a href="index.html#about"    role="listitem">אודות</a>
-          <a href="index.html#services" role="listitem">שירותים</a>
-          <a href="index.html#team"     role="listitem">הצוות</a>
-          <a href="careers.html"        role="listitem">קריירה</a>
-          <a href="index.html#contact"  role="listitem">צור קשר</a>
+          <a href="index.html#about"    role="listitem" data-i18n="nav.about">אודות</a>
+          <a href="index.html#services" role="listitem" data-i18n="nav.services">שירותים</a>
+          <a href="index.html#team"     role="listitem" data-i18n="nav.team">הצוות</a>
+          <a href="careers.html"        role="listitem" data-i18n="nav.careers">קריירה</a>
+          <a href="index.html#contact"  role="listitem" data-i18n="nav.contact">צור קשר</a>
         </div>
       </div>
     </nav>
@@ -407,27 +434,27 @@
         <div class="page-hero__inner">
           <div class="page-hero__tag">
             <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
-            הצטרפו לצוות OgEnergy
+            <span data-i18n="careers_hero.tag">הצטרפו לצוות OgEnergy</span>
           </div>
           <h1 class="page-hero__title" id="careers-heading">
-            בואו לבנות את<br/>
-            <span>עתיד האנרגיה</span> איתנו
+            <span data-i18n="careers_hero.title_line1">בואו לבנות את</span><br/>
+            <span data-i18n="careers_hero.title_highlight">עתיד האנרגיה</span><span data-i18n="careers_hero.title_line2"> איתנו</span>
           </h1>
-          <p class="page-hero__desc">
+          <p class="page-hero__desc" data-i18n="careers_hero.desc">
             לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע.
           </p>
           <div class="page-hero__stats">
             <div>
               <div class="page-hero__stat-num">5<span>+</span></div>
-              <div class="page-hero__stat-lbl">משרות פתוחות</div>
+              <div class="page-hero__stat-lbl" data-i18n="careers_hero.stat1_lbl">משרות פתוחות</div>
             </div>
             <div>
               <div class="page-hero__stat-num">100<span>%</span></div>
-              <div class="page-hero__stat-lbl">אפשרות עבודה היברידית</div>
+              <div class="page-hero__stat-lbl" data-i18n="careers_hero.stat2_lbl">אפשרות עבודה היברידית</div>
             </div>
             <div>
               <div class="page-hero__stat-num">4.9<span>★</span></div>
-              <div class="page-hero__stat-lbl">דירוג מעסיק (Glassdoor)</div>
+              <div class="page-hero__stat-lbl" data-i18n="careers_hero.stat3_lbl">דירוג מעסיק (Glassdoor)</div>
             </div>
           </div>
         </div>
@@ -442,29 +469,29 @@
             <div class="value-item__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
-            <div class="value-item__title">משמעות אמיתית</div>
-            <div class="value-item__desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג.</div>
+            <div class="value-item__title" data-i18n="values.v1_title">משמעות אמיתית</div>
+            <div class="value-item__desc" data-i18n="values.v1_desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג.</div>
           </div>
           <div class="value-item">
             <div class="value-item__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <div class="value-item__title">צוות מדהים</div>
-            <div class="value-item__desc">ניחבה ליביבם נולום ארווס, סאפיאן עולם פרולוגמה.</div>
+            <div class="value-item__title" data-i18n="values.v2_title">צוות מדהים</div>
+            <div class="value-item__desc" data-i18n="values.v2_desc">ניחבה ליביבם נולום ארווס, סאפיאן עולם פרולוגמה.</div>
           </div>
           <div class="value-item">
             <div class="value-item__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <div class="value-item__title">צמיחה מקצועית</div>
-            <div class="value-item__desc">קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש.</div>
+            <div class="value-item__title" data-i18n="values.v3_title">צמיחה מקצועית</div>
+            <div class="value-item__desc" data-i18n="values.v3_desc">קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש.</div>
           </div>
           <div class="value-item">
             <div class="value-item__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
-            <div class="value-item__title">השפעה גלובלית</div>
-            <div class="value-item__desc">דנש שמחת צחוק, לוריק מורגנש ביאקוני ניחבה.</div>
+            <div class="value-item__title" data-i18n="values.v4_title">השפעה גלובלית</div>
+            <div class="value-item__desc" data-i18n="values.v4_desc">דנש שמחת צחוק, לוריק מורגנש ביאקוני ניחבה.</div>
           </div>
         </div>
       </div>
@@ -474,49 +501,49 @@
     <section class="jobs" id="jobs" aria-labelledby="jobs-heading">
       <div class="container">
         <header class="jobs__header">
-          <div class="section-tag">משרות פתוחות</div>
-          <h2 class="section-title" id="jobs-heading">מצא את התפקיד שלך</h2>
-          <p class="section-lead">
+          <div class="section-tag" data-i18n="jobs.tag">משרות פתוחות</div>
+          <h2 class="section-title" id="jobs-heading" data-i18n="jobs.title">מצא את התפקיד שלך</h2>
+          <p class="section-lead" data-i18n="jobs.lead">
             לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה דנש שמחת.
           </p>
         </header>
 
-        <div class="jobs__filter" role="group" aria-label="סנן לפי מחלקה">
-          <button class="filter-btn active" data-filter="all">הכל</button>
-          <button class="filter-btn" data-filter="engineering">הנדסה</button>
-          <button class="filter-btn" data-filter="tech">טכנולוגיה</button>
-          <button class="filter-btn" data-filter="business">עסקים</button>
-          <button class="filter-btn" data-filter="ops">תפעול</button>
+        <div class="jobs__filter" role="group" data-i18n-aria="jobs.filter_aria" aria-label="סנן לפי מחלקה">
+          <button class="filter-btn active" data-filter="all" data-i18n="jobs.filter_all">הכל</button>
+          <button class="filter-btn" data-filter="engineering" data-i18n="jobs.filter_engineering">הנדסה</button>
+          <button class="filter-btn" data-filter="tech" data-i18n="jobs.filter_tech">טכנולוגיה</button>
+          <button class="filter-btn" data-filter="business" data-i18n="jobs.filter_business">עסקים</button>
+          <button class="filter-btn" data-filter="ops" data-i18n="jobs.filter_ops">תפעול</button>
         </div>
 
         <div class="jobs__list" role="list">
 
           <article class="job-card" role="listitem" data-dept="engineering">
             <div class="job-card__body">
-              <div class="job-card__dept">הנדסה</div>
-              <h3 class="job-card__title">מהנדס/ת מערכות אנרגיה בכיר/ה</h3>
-              <p class="job-card__desc">
+              <div class="job-card__dept" data-i18n="jobs.j1_dept">הנדסה</div>
+              <h3 class="job-card__title" data-i18n="jobs.j1_title">מהנדס/ת מערכות אנרגיה בכיר/ה</h3>
+              <p class="job-card__desc" data-i18n="jobs.j1_desc">
                 לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. ניחבה ליביבם נולום ארווס סאפיאן עולם פרולוגמה הוא הדורגאמה.
               </p>
               <div class="job-card__meta">
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  תל אביב / היברידי
+                  <span data-i18n="jobs.j1_location">תל אביב / היברידי</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  משרה מלאה
+                  <span data-i18n="jobs.full_time">משרה מלאה</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  5+ שנות ניסיון
+                  <span data-i18n="jobs.j1_exp">5+ שנות ניסיון</span>
                 </span>
               </div>
             </div>
             <div class="job-card__cta">
-              <span class="job-card__new">חדש</span>
+              <span class="job-card__new" data-i18n="jobs.new_badge">חדש</span>
               <a href="mailto:careers@ogenergy.co.il?subject=מהנדס מערכות אנרגיה בכיר" class="job-card__apply">
-                הגש מועמדות
+                <span data-i18n="jobs.apply_btn">הגש מועמדות</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -524,29 +551,29 @@
 
           <article class="job-card" role="listitem" data-dept="tech">
             <div class="job-card__body">
-              <div class="job-card__dept">טכנולוגיה</div>
-              <h3 class="job-card__title">מפתח/ת Full Stack — מערכות IoT</h3>
-              <p class="job-card__desc">
+              <div class="job-card__dept" data-i18n="jobs.j2_dept">טכנולוגיה</div>
+              <h3 class="job-card__title" data-i18n="jobs.j2_title">מפתח/ת Full Stack — מערכות IoT</h3>
+              <p class="job-card__desc" data-i18n="jobs.j2_desc">
                 קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני. דנש שמחת צחוק, ניחבה ליביבם נולום ארווס סאפיאן.
               </p>
               <div class="job-card__meta">
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  תל אביב / מרחוק
+                  <span data-i18n="jobs.j2_location">תל אביב / מרחוק</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  משרה מלאה
+                  <span data-i18n="jobs.full_time">משרה מלאה</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  3+ שנות ניסיון
+                  <span data-i18n="jobs.j2_exp">3+ שנות ניסיון</span>
                 </span>
               </div>
             </div>
             <div class="job-card__cta">
               <a href="mailto:careers@ogenergy.co.il?subject=מפתח Full Stack IoT" class="job-card__apply">
-                הגש מועמדות
+                <span data-i18n="jobs.apply_btn">הגש מועמדות</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -554,30 +581,30 @@
 
           <article class="job-card" role="listitem" data-dept="business">
             <div class="job-card__body">
-              <div class="job-card__dept">עסקים</div>
-              <h3 class="job-card__title">מנהל/ת פיתוח עסקי</h3>
-              <p class="job-card__desc">
+              <div class="job-card__dept" data-i18n="jobs.j3_dept">עסקים</div>
+              <h3 class="job-card__title" data-i18n="jobs.j3_title">מנהל/ת פיתוח עסקי</h3>
+              <p class="job-card__desc" data-i18n="jobs.j3_desc">
                 סאפיאן עולם פרולוגמה הדורגאמה ולהאמית קולהע צופעט למרקוח. ניחבה ליביבם נולום ארווס, קולורס מונחה ליברה.
               </p>
               <div class="job-card__meta">
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  תל אביב
+                  <span data-i18n="jobs.j3_location">תל אביב</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  משרה מלאה
+                  <span data-i18n="jobs.full_time">משרה מלאה</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  4+ שנות ניסיון
+                  <span data-i18n="jobs.j3_exp">4+ שנות ניסיון</span>
                 </span>
               </div>
             </div>
             <div class="job-card__cta">
-              <span class="job-card__new">חדש</span>
+              <span class="job-card__new" data-i18n="jobs.new_badge">חדש</span>
               <a href="mailto:careers@ogenergy.co.il?subject=מנהל פיתוח עסקי" class="job-card__apply">
-                הגש מועמדות
+                <span data-i18n="jobs.apply_btn">הגש מועמדות</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -585,29 +612,29 @@
 
           <article class="job-card" role="listitem" data-dept="ops">
             <div class="job-card__body">
-              <div class="job-card__dept">תפעול</div>
-              <h3 class="job-card__title">טכנאי/ת מערכות סולאריות</h3>
-              <p class="job-card__desc">
+              <div class="job-card__dept" data-i18n="jobs.j4_dept">תפעול</div>
+              <h3 class="job-card__title" data-i18n="jobs.j4_title">טכנאי/ת מערכות סולאריות</h3>
+              <p class="job-card__desc" data-i18n="jobs.j4_desc">
                 לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון — דנש שמחת צחוק, בגורמה לוריק.
               </p>
               <div class="job-card__meta">
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  כל הארץ
+                  <span data-i18n="jobs.j4_location">כל הארץ</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  משרה מלאה
+                  <span data-i18n="jobs.full_time">משרה מלאה</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  2+ שנות ניסיון
+                  <span data-i18n="jobs.j4_exp">2+ שנות ניסיון</span>
                 </span>
               </div>
             </div>
             <div class="job-card__cta">
               <a href="mailto:careers@ogenergy.co.il?subject=טכנאי מערכות סולאריות" class="job-card__apply">
-                הגש מועמדות
+                <span data-i18n="jobs.apply_btn">הגש מועמדות</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -615,29 +642,29 @@
 
           <article class="job-card" role="listitem" data-dept="tech">
             <div class="job-card__body">
-              <div class="job-card__dept">טכנולוגיה</div>
-              <h3 class="job-card__title">מדען/ית נתונים — אנרגיה חכמה</h3>
-              <p class="job-card__desc">
+              <div class="job-card__dept" data-i18n="jobs.j5_dept">טכנולוגיה</div>
+              <h3 class="job-card__title" data-i18n="jobs.j5_title">מדען/ית נתונים — אנרגיה חכמה</h3>
+              <p class="job-card__desc" data-i18n="jobs.j5_desc">
                 ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה. קולורס מונחה ליברה שיושוס, בגורמה לוריק.
               </p>
               <div class="job-card__meta">
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  תל אביב / מרחוק
+                  <span data-i18n="jobs.j5_location">תל אביב / מרחוק</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  משרה מלאה
+                  <span data-i18n="jobs.full_time">משרה מלאה</span>
                 </span>
                 <span class="job-badge">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  3+ שנות ניסיון
+                  <span data-i18n="jobs.j5_exp">3+ שנות ניסיון</span>
                 </span>
               </div>
             </div>
             <div class="job-card__cta">
               <a href="mailto:careers@ogenergy.co.il?subject=מדען נתונים אנרגיה חכמה" class="job-card__apply">
-                הגש מועמדות
+                <span data-i18n="jobs.apply_btn">הגש מועמדות</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -657,16 +684,16 @@
               <path d="M20 5L10 19h8l-4 10 14-16h-8l4-8z" fill="#fff"/>
             </svg>
           </div>
-          <h2 class="cta-section__title" id="cta-heading">לא מצאת את התפקיד שחיפשת?</h2>
-          <p class="cta-section__desc">
+          <h2 class="cta-section__title" id="cta-heading" data-i18n="careers_cta.title">לא מצאת את התפקיד שחיפשת?</h2>
+          <p class="cta-section__desc" data-i18n="careers_cta.desc">
             שלחו לנו קורות חיים פתוחים — תמיד נשמח לשמוע על אנשים מוכשרים.
           </p>
           <div class="cta-section__actions">
             <a href="mailto:careers@ogenergy.co.il?subject=מועמדות פתוחה" class="btn btn--white">
-              שלח קורות חיים
+              <span data-i18n="careers_cta.resume_btn">שלח קורות חיים</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </a>
-            <a href="index.html#contact" class="btn btn--ghost">דברו איתנו</a>
+            <a href="index.html#contact" class="btn btn--ghost" data-i18n="careers_cta.talk_btn">דברו איתנו</a>
           </div>
         </div>
       </div>
@@ -678,24 +705,27 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__inner">
-        <a href="index.html" class="logo-link" aria-label="חזור לדף הבית">
+        <a href="index.html" class="logo-link" data-i18n-aria="footer.back_aria" aria-label="חזור לדף הבית">
           <svg width="26" height="26" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <rect width="34" height="34" rx="9" fill="#f97316"/>
             <path d="M20 5L10 19h8l-4 10 14-16h-8l4-8z" fill="#fff"/>
           </svg>
           <span class="logo-wordmark" style="color:#fff;">Og<span>Energy</span></span>
         </a>
-        <p class="footer__copy">&copy; 2026 OgEnergy. כל הזכויות שמורות.</p>
+        <p class="footer__copy" data-i18n="footer.copy">&copy; 2026 OgEnergy. כל הזכויות שמורות.</p>
         <ul class="footer__links" role="list">
-          <li><a href="index.html#about">אודות</a></li>
-          <li><a href="index.html#services">שירותים</a></li>
-          <li><a href="index.html#team">הצוות</a></li>
-          <li><a href="careers.html">קריירה</a></li>
-          <li><a href="index.html#contact">צור קשר</a></li>
+          <li><a href="index.html#about" data-i18n="nav.about">אודות</a></li>
+          <li><a href="index.html#services" data-i18n="nav.services">שירותים</a></li>
+          <li><a href="index.html#team" data-i18n="nav.team">הצוות</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">קריירה</a></li>
+          <li><a href="index.html#contact" data-i18n="nav.contact">צור קשר</a></li>
         </ul>
       </div>
     </div>
   </footer>
+
+  <script src="i18n/translations.js"></script>
+  <script src="i18n/i18n.js"></script>
 
   <script>
     // Mobile nav toggle
@@ -706,14 +736,14 @@
       function closeNav() {
         mobileNav.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'פתח תפריט ניווט');
+        toggle.setAttribute('aria-label', toggle.getAttribute('data-open-label') || 'פתח תפריט ניווט');
       }
       toggle.addEventListener('click', function () {
         var isOpen = mobileNav.classList.contains('open');
         if (isOpen) { closeNav(); } else {
           mobileNav.classList.add('open');
           toggle.setAttribute('aria-expanded', 'true');
-          toggle.setAttribute('aria-label', 'סגור תפריט ניווט');
+          toggle.setAttribute('aria-label', toggle.getAttribute('data-close-label') || 'סגור תפריט ניווט');
         }
       });
       mobileNav.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeNav); });
