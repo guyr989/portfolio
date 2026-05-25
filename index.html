@@ -431,7 +431,7 @@
     }
     .stat-pill--1 { top: 10%; right: -14%; animation-delay: 0s; }
     .stat-pill--2 { top: 50%; left: -16%; animation-delay: 1.2s; }
-    .stat-pill--3 { bottom: 18%; right: -12%; animation-delay: 2s; }
+    .stat-pill--3 { bottom: 34%; right: -12%; animation-delay: 2s; }
     .stat-pill__dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
 
     @keyframes float {
@@ -1054,11 +1054,46 @@
       .footer__inner { flex-direction: column; text-align: center; }
       .footer__links { justify-content: center; }
     }
+
+    /* ── Language switcher ──────────────────────────────────────── */
+    .lang-switch {
+      display: flex;
+      gap: .25rem;
+      align-items: center;
+    }
+    .lang-btn {
+      background: none;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: .2rem .65rem;
+      font-family: var(--font-base);
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--color-muted-text);
+      cursor: pointer;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .lang-btn.active,
+    .lang-btn:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    .lang-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    /* ── LTR directional overrides ──────────────────────────────── */
+    [dir="ltr"] .skip-link              { right: auto; left: 1rem; }
+    [dir="ltr"] .timeline__list::before { right: auto; left: 20px; }
+    [dir="ltr"] .timeline__item         { padding-right: 0; padding-left: 56px; }
+    [dir="ltr"] .timeline__dot          { right: auto; left: 10px; }
+    [dir="ltr"] .modal__close           { left: auto; right: 1.25rem; }
+    [dir="ltr"] .stat-pill--1           { right: auto; left: -14%; }
+    [dir="ltr"] .stat-pill--2           { left: auto; right: -16%; }
+    [dir="ltr"] .stat-pill--3           { right: auto; left: -12%; }
   </style>
 </head>
 <body>
 
-  <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">דלג לתוכן הראשי</a>
 
   <!-- ── NAVIGATION ───────────────────────────────────────────── -->
   <header role="banner">
@@ -1067,7 +1102,7 @@
         <div class="nav__inner">
 
           <!-- OgEnergy Logo -->
-          <a href="#" class="logo-link" aria-label="OgEnergy דף הבית">
+          <a href="#" class="logo-link" data-i18n-aria="nav.home_aria" aria-label="OgEnergy דף הבית">
             <!-- Lightning bolt SVG logo mark -->
             <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <rect width="34" height="34" rx="9" fill="#f97316"/>
@@ -1077,14 +1112,25 @@
           </a>
 
           <ul class="nav__links" role="list">
-            <li><a href="#about">אודות</a></li>
-            <li><a href="#services">שירותים</a></li>
-            <li><a href="#team">הצוות</a></li>
-            <li><a href="careers.html">קריירה</a></li>
-            <li><a href="#contact" class="nav__cta">צור קשר</a></li>
+            <li><a href="#about" data-i18n="nav.about">אודות</a></li>
+            <li><a href="#services" data-i18n="nav.services">שירותים</a></li>
+            <li><a href="#team" data-i18n="nav.team">הצוות</a></li>
+            <li><a href="careers.html" data-i18n="nav.careers">קריירה</a></li>
+            <li><a href="#contact" class="nav__cta" data-i18n="nav.contact">צור קשר</a></li>
           </ul>
 
-          <button class="nav__toggle" aria-label="פתח תפריט ניווט" aria-expanded="false" aria-controls="mobile-nav">
+          <div class="lang-switch" aria-label="Language / שפה">
+            <button class="lang-btn active" data-lang="he">HE</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+
+          <button class="nav__toggle"
+            data-i18n-aria="nav.toggle_open"
+            data-i18n-open="nav.toggle_open"
+            data-i18n-close="nav.toggle_close"
+            data-open-label="פתח תפריט ניווט"
+            data-close-label="סגור תפריט ניווט"
+            aria-label="פתח תפריט ניווט" aria-expanded="false" aria-controls="mobile-nav">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <line x1="3" y1="6" x2="21" y2="6"/>
               <line x1="3" y1="12" x2="21" y2="12"/>
@@ -1094,11 +1140,11 @@
         </div>
 
         <div class="nav__mobile" id="mobile-nav" role="list">
-          <a href="#about"        role="listitem">אודות</a>
-          <a href="#services"     role="listitem">שירותים</a>
-          <a href="#team"         role="listitem">הצוות</a>
-          <a href="careers.html"  role="listitem">קריירה</a>
-          <a href="#contact"      role="listitem">צור קשר</a>
+          <a href="#about"        role="listitem" data-i18n="nav.about">אודות</a>
+          <a href="#services"     role="listitem" data-i18n="nav.services">שירותים</a>
+          <a href="#team"         role="listitem" data-i18n="nav.team">הצוות</a>
+          <a href="careers.html"  role="listitem" data-i18n="nav.careers">קריירה</a>
+          <a href="#contact"      role="listitem" data-i18n="nav.contact">צור קשר</a>
         </div>
       </div>
     </nav>
@@ -1114,27 +1160,27 @@
           <div class="hero__content">
             <div class="hero__tag">
               <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="4"/></svg>
-              אנרגיה לעתיד — OgEnergy
+              <span data-i18n="hero.tag">אנרגיה לעתיד — OgEnergy</span>
             </div>
             <h1 class="hero__title" id="hero-heading">
-              פתרונות אנרגיה<br/>
-              <span class="highlight">חכמים ויעילים</span>
+              <span data-i18n="hero.title_line1">פתרונות אנרגיה</span><br/>
+              <span class="highlight" data-i18n="hero.title_highlight">חכמים ויעילים</span>
             </h1>
-            <p class="hero__desc">
+            <p class="hero__desc" data-i18n="hero.desc">
               לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע.
             </p>
             <div class="hero__actions">
               <a href="#about" class="btn btn--primary">
-                גלה עוד
+                <span data-i18n="hero.cta_primary">גלה עוד</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="#contact" class="btn btn--outline">צור קשר</a>
+              <a href="#contact" class="btn btn--outline" data-i18n="hero.cta_secondary">צור קשר</a>
             </div>
           </div>
 
           <div class="hero__visual">
             <div style="position: relative;">
-              <div class="energy-card" role="img" aria-label="כרטיס מיתוג OgEnergy">
+              <div class="energy-card" role="img" data-i18n-aria="hero.card_aria" aria-label="כרטיס מיתוג OgEnergy">
                 <div class="energy-card__grid" aria-hidden="true"></div>
                 <div class="energy-card__logo">
                   <div class="energy-card__glow" aria-hidden="true"></div>
@@ -1145,35 +1191,35 @@
                     </svg>
                   </div>
                   <div class="energy-card__name">Og<span>Energy</span></div>
-                  <div class="energy-card__tagline">אנרגיה לעתיד</div>
+                  <div class="energy-card__tagline" data-i18n="hero.card_tagline">אנרגיה לעתיד</div>
                 </div>
                 <div class="energy-card__stats">
                   <div class="e-stat">
                     <div class="e-stat__val">15+</div>
-                    <div class="e-stat__lbl">שנות ניסיון</div>
+                    <div class="e-stat__lbl" data-i18n="hero.stat1_lbl">שנות ניסיון</div>
                   </div>
                   <div class="e-stat">
                     <div class="e-stat__val">200+</div>
-                    <div class="e-stat__lbl">פרויקטים</div>
+                    <div class="e-stat__lbl" data-i18n="hero.stat2_lbl">פרויקטים</div>
                   </div>
                   <div class="e-stat">
                     <div class="e-stat__val">98%</div>
-                    <div class="e-stat__lbl">שביעות רצון</div>
+                    <div class="e-stat__lbl" data-i18n="hero.stat3_lbl">שביעות רצון</div>
                   </div>
                 </div>
               </div>
 
               <div class="stat-pill stat-pill--1" aria-hidden="true">
                 <span class="stat-pill__dot"></span>
-                פעיל ומחובר
+                <span data-i18n="hero.pill1">פעיל ומחובר</span>
               </div>
               <div class="stat-pill stat-pill--2" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 80 80" fill="#f97316" aria-hidden="true"><path d="M46 8L18 44h20l-8 28 34-40H44l8-24z"/></svg>
-                חיסכון של 40% בחשמל
+                <span data-i18n="hero.pill2">חיסכון של 40% בחשמל</span>
               </div>
               <div class="stat-pill stat-pill--3" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                ISO 50001 מוסמך
+                <span data-i18n="hero.pill3">ISO 50001 מוסמך</span>
               </div>
             </div>
           </div>
@@ -1183,24 +1229,24 @@
     </section>
 
     <!-- ── STATS BAR ───────────────────────────────────────────── -->
-    <section class="stats-bar" aria-label="נתוני חברה">
+    <section class="stats-bar" data-i18n-aria="stats_bar.aria" aria-label="נתוני חברה">
       <div class="container">
         <div class="stats-bar__grid">
           <div class="stat-item">
             <div class="stat-item__number">15<span>+</span></div>
-            <div class="stat-item__label">שנות ניסיון</div>
+            <div class="stat-item__label" data-i18n="stats_bar.years">שנות ניסיון</div>
           </div>
           <div class="stat-item">
             <div class="stat-item__number">200<span>+</span></div>
-            <div class="stat-item__label">פרויקטים הושלמו</div>
+            <div class="stat-item__label" data-i18n="stats_bar.projects">פרויקטים הושלמו</div>
           </div>
           <div class="stat-item">
             <div class="stat-item__number">40<span>%</span></div>
-            <div class="stat-item__label">חיסכון ממוצע באנרגיה</div>
+            <div class="stat-item__label" data-i18n="stats_bar.savings">חיסכון ממוצע באנרגיה</div>
           </div>
           <div class="stat-item">
             <div class="stat-item__number">98<span>%</span></div>
-            <div class="stat-item__label">שביעות רצון לקוחות</div>
+            <div class="stat-item__label" data-i18n="stats_bar.satisfaction">שביעות רצון לקוחות</div>
           </div>
         </div>
       </div>
@@ -1212,30 +1258,30 @@
         <div class="about__grid">
 
           <div class="about__text">
-            <div class="section-tag">אודות OgEnergy</div>
-            <h2 class="section-title" id="about-heading">מי אנחנו ומה מניע אותנו</h2>
-            <p>
+            <div class="section-tag" data-i18n="about.tag">אודות OgEnergy</div>
+            <h2 class="section-title" id="about-heading" data-i18n="about.title">מי אנחנו ומה מניע אותנו</h2>
+            <p data-i18n="about.p1">
               לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה. דנש שמחת צחוק, בגורמה לוריק מורגנש ביאקוני. ימנחם ניחבה — קולורס מונחה.
             </p>
-            <p>
+            <p data-i18n="about.p2">
               קולורס מונחה ליברה שיושוס. ניחבה ליביבם נולום ארווס. סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מלרנצ.
             </p>
-            <p>
+            <p data-i18n="about.p3">
               כאשר בלריק גראל טייס, ולתיק בלריק קונסקטטור הלבנה. אדיפיסינג אלית ושבעגט ליבם סולגק. נוסמן קולורס מונחה עמחליף לורם קלורס מנחה, נולום ארווס סאפיאן — עולם.
             </p>
             <div style="margin-top: 2rem;">
-              <a href="#contact" class="btn btn--primary">בואו נדבר</a>
+              <a href="#contact" class="btn btn--primary" data-i18n="about.cta">בואו נדבר</a>
             </div>
           </div>
 
-          <div class="about__features" aria-label="ערכי החברה">
+          <div class="about__features" data-i18n-aria="about.values_aria" aria-label="ערכי החברה">
             <div class="feature-card">
               <div class="feature-card__icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
               </div>
               <div class="feature-card__body">
-                <h3>יעילות אנרגטית</h3>
-                <p>לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית מולט ומתל.</p>
+                <h3 data-i18n="about.f1_title">יעילות אנרגטית</h3>
+                <p data-i18n="about.f1_desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית מולט ומתל.</p>
               </div>
             </div>
 
@@ -1244,8 +1290,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               </div>
               <div class="feature-card__body">
-                <h3>קיימות סביבתית</h3>
-                <p>ניחבה ליביבם נולום ארווס, סאפיאן עולם פרולוגמה הוא הדורגאמה.</p>
+                <h3 data-i18n="about.f2_title">קיימות סביבתית</h3>
+                <p data-i18n="about.f2_desc">ניחבה ליביבם נולום ארווס, סאפיאן עולם פרולוגמה הוא הדורגאמה.</p>
               </div>
             </div>
 
@@ -1254,8 +1300,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
               </div>
               <div class="feature-card__body">
-                <h3>מקצוענות ואמינות</h3>
-                <p>קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני סת.</p>
+                <h3 data-i18n="about.f3_title">מקצוענות ואמינות</h3>
+                <p data-i18n="about.f3_desc">קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני סת.</p>
               </div>
             </div>
 
@@ -1264,8 +1310,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 4.9V17L12 22l-9-5.1V6.9L12 2z"/></svg>
               </div>
               <div class="feature-card__body">
-                <h3>טכנולוגיה מתקדמת</h3>
-                <p>דנש שמחת צחוק, לוריק מורגנש ביאקוני — ניחבה ליביבם נולום ארווס.</p>
+                <h3 data-i18n="about.f4_title">טכנולוגיה מתקדמת</h3>
+                <p data-i18n="about.f4_desc">דנש שמחת צחוק, לוריק מורגנש ביאקוני — ניחבה ליביבם נולום ארווס.</p>
               </div>
             </div>
           </div>
@@ -1278,9 +1324,9 @@
     <section class="skills" id="services" aria-labelledby="services-heading">
       <div class="container">
         <header class="skills__header">
-          <div class="section-tag">שירותים</div>
-          <h2 class="section-title" id="services-heading">מה אנחנו מציעים</h2>
-          <p class="section-lead">
+          <div class="section-tag" data-i18n="services.tag">שירותים</div>
+          <h2 class="section-title" id="services-heading" data-i18n="services.title">מה אנחנו מציעים</h2>
+          <p class="section-lead" data-i18n="services.lead">
             לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה דנש שמחת.
           </p>
         </header>
@@ -1288,54 +1334,54 @@
         <div class="skills__grid">
           <article class="skill-card">
             <div class="skill-card__num">01</div>
-            <h3 class="skill-card__title">ניהול צריכת חשמל</h3>
-            <p class="skill-card__desc">מערכות ניטור חכמות לזיהוי בזבוז ואופטימיזציה של צריכת האנרגיה.</p>
-            <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="רמת מומחיות: 95%">
+            <h3 class="skill-card__title" data-i18n="services.c1_title">ניהול צריכת חשמל</h3>
+            <p class="skill-card__desc" data-i18n="services.c1_desc">מערכות ניטור חכמות לזיהוי בזבוז ואופטימיזציה של צריכת האנרגיה.</p>
+            <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" data-i18n-aria="services.c1_aria" aria-label="רמת מומחיות: 95%">
               <div class="skill-bar__fill" style="width: 95%;"></div>
             </div>
           </article>
 
           <article class="skill-card">
             <div class="skill-card__num">02</div>
-            <h3 class="skill-card__title">אנרגיה סולארית</h3>
-            <p class="skill-card__desc">תכנון והתקנה של מערכות פוטוולטאיות לבתים ועסקים בכל הארץ.</p>
-            <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="רמת מומחיות: 90%">
+            <h3 class="skill-card__title" data-i18n="services.c2_title">אנרגיה סולארית</h3>
+            <p class="skill-card__desc" data-i18n="services.c2_desc">תכנון והתקנה של מערכות פוטוולטאיות לבתים ועסקים בכל הארץ.</p>
+            <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" data-i18n-aria="services.c2_aria" aria-label="רמת מומחיות: 90%">
               <div class="skill-bar__fill" style="width: 90%;"></div>
             </div>
           </article>
 
           <article class="skill-card">
             <div class="skill-card__num">03</div>
-            <h3 class="skill-card__title">אוטומציה חכמה</h3>
-            <p class="skill-card__desc">מערכות בית חכם ובניינים חכמים לניהול אוטומטי של הוצאות האנרגיה.</p>
-            <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="רמת מומחיות: 85%">
+            <h3 class="skill-card__title" data-i18n="services.c3_title">אוטומציה חכמה</h3>
+            <p class="skill-card__desc" data-i18n="services.c3_desc">מערכות בית חכם ובניינים חכמים לניהול אוטומטי של הוצאות האנרגיה.</p>
+            <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" data-i18n-aria="services.c3_aria" aria-label="רמת מומחיות: 85%">
               <div class="skill-bar__fill" style="width: 85%;"></div>
             </div>
           </article>
 
           <article class="skill-card">
             <div class="skill-card__num">04</div>
-            <h3 class="skill-card__title">ייעוץ אנרגטי</h3>
-            <p class="skill-card__desc">סאפיאן עולם פרולוגמה הדורגאמה ולהאמית קולהע — ייעוץ מקצועי מותאם.</p>
-            <div class="skill-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="רמת מומחיות: 92%">
+            <h3 class="skill-card__title" data-i18n="services.c4_title">ייעוץ אנרגטי</h3>
+            <p class="skill-card__desc" data-i18n="services.c4_desc">סאפיאן עולם פרולוגמה הדורגאמה ולהאמית קולהע — ייעוץ מקצועי מותאם.</p>
+            <div class="skill-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" data-i18n-aria="services.c4_aria" aria-label="רמת מומחיות: 92%">
               <div class="skill-bar__fill" style="width: 92%;"></div>
             </div>
           </article>
 
           <article class="skill-card">
             <div class="skill-card__num">05</div>
-            <h3 class="skill-card__title">אחסון אנרגיה</h3>
-            <p class="skill-card__desc">פתרונות סוללות מתקדמים לאחסון עודפי אנרגיה לשימוש בשעות עומס.</p>
-            <div class="skill-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="רמת מומחיות: 78%">
+            <h3 class="skill-card__title" data-i18n="services.c5_title">אחסון אנרגיה</h3>
+            <p class="skill-card__desc" data-i18n="services.c5_desc">פתרונות סוללות מתקדמים לאחסון עודפי אנרגיה לשימוש בשעות עומס.</p>
+            <div class="skill-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-i18n-aria="services.c5_aria" aria-label="רמת מומחיות: 78%">
               <div class="skill-bar__fill" style="width: 78%;"></div>
             </div>
           </article>
 
           <article class="skill-card">
             <div class="skill-card__num">06</div>
-            <h3 class="skill-card__title">אנרגיה לתעשייה</h3>
-            <p class="skill-card__desc">ניחבה ליביבם נולום ארווס, קולורס מונחה — פתרונות תעשייתיים בקנה מידה גדול.</p>
-            <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="רמת מומחיות: 88%">
+            <h3 class="skill-card__title" data-i18n="services.c6_title">אנרגיה לתעשייה</h3>
+            <p class="skill-card__desc" data-i18n="services.c6_desc">ניחבה ליביבם נולום ארווס, קולורס מונחה — פתרונות תעשייתיים בקנה מידה גדול.</p>
+            <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" data-i18n-aria="services.c6_aria" aria-label="רמת מומחיות: 88%">
               <div class="skill-bar__fill" style="width: 88%;"></div>
             </div>
           </article>
@@ -1347,9 +1393,9 @@
     <section class="timeline" id="experience" aria-labelledby="experience-heading">
       <div class="container">
         <header class="timeline__header">
-          <div class="section-tag">ניסיון</div>
-          <h2 class="section-title" id="experience-heading">ההיסטוריה שלנו</h2>
-          <p class="section-lead" style="margin-inline: auto;">
+          <div class="section-tag" data-i18n="timeline.tag">ניסיון</div>
+          <h2 class="section-title" id="experience-heading" data-i18n="timeline.title">ההיסטוריה שלנו</h2>
+          <p class="section-lead" style="margin-inline: auto;" data-i18n="timeline.lead">
             לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית סת אלמנקום ניסי נון ניבאה.
           </p>
         </header>
@@ -1357,31 +1403,31 @@
         <ol class="timeline__list">
           <li class="timeline__item">
             <div class="timeline__dot" aria-hidden="true"></div>
-            <div class="timeline__year">2022 — הווה</div>
-            <h3 class="timeline__title">הרחבה לשווקים חדשים</h3>
-            <div class="timeline__org">OgEnergy — מובילה בשוק</div>
-            <p class="timeline__desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה דנש שמחת צחוק, בגורמה לוריק.</p>
+            <div class="timeline__year" data-i18n="timeline.i1_year">2022 — הווה</div>
+            <h3 class="timeline__title" data-i18n="timeline.i1_title">הרחבה לשווקים חדשים</h3>
+            <div class="timeline__org" data-i18n="timeline.i1_org">OgEnergy — מובילה בשוק</div>
+            <p class="timeline__desc" data-i18n="timeline.i1_desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה דנש שמחת צחוק, בגורמה לוריק.</p>
           </li>
           <li class="timeline__item">
             <div class="timeline__dot" aria-hidden="true"></div>
-            <div class="timeline__year">2019 — 2022</div>
-            <h3 class="timeline__title">השקת מוצרי אחסון אנרגיה</h3>
-            <div class="timeline__org">מהפכה טכנולוגית</div>
-            <p class="timeline__desc">ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע צופעט למרקוח.</p>
+            <div class="timeline__year" data-i18n="timeline.i2_year">2019 — 2022</div>
+            <h3 class="timeline__title" data-i18n="timeline.i2_title">השקת מוצרי אחסון אנרגיה</h3>
+            <div class="timeline__org" data-i18n="timeline.i2_org">מהפכה טכנולוגית</div>
+            <p class="timeline__desc" data-i18n="timeline.i2_desc">ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע צופעט למרקוח.</p>
           </li>
           <li class="timeline__item">
             <div class="timeline__dot" aria-hidden="true"></div>
-            <div class="timeline__year">2016 — 2019</div>
-            <h3 class="timeline__title">צמיחה מואצת בסקטור הסולארי</h3>
-            <div class="timeline__org">100+ פרויקטים</div>
-            <p class="timeline__desc">קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני — דנש שמחת צחוק נולום ארווס.</p>
+            <div class="timeline__year" data-i18n="timeline.i3_year">2016 — 2019</div>
+            <h3 class="timeline__title" data-i18n="timeline.i3_title">צמיחה מואצת בסקטור הסולארי</h3>
+            <div class="timeline__org" data-i18n="timeline.i3_org">100+ פרויקטים</div>
+            <p class="timeline__desc" data-i18n="timeline.i3_desc">קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני — דנש שמחת צחוק נולום ארווס.</p>
           </li>
           <li class="timeline__item">
             <div class="timeline__dot" aria-hidden="true"></div>
-            <div class="timeline__year">2011</div>
-            <h3 class="timeline__title">הקמת OgEnergy</h3>
-            <div class="timeline__org">הצעד הראשון לעתיד</div>
-            <p class="timeline__desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית — חזון ברור לאנרגיה נקייה וחכמה.</p>
+            <div class="timeline__year" data-i18n="timeline.i4_year">2011</div>
+            <h3 class="timeline__title" data-i18n="timeline.i4_title">הקמת OgEnergy</h3>
+            <div class="timeline__org" data-i18n="timeline.i4_org">הצעד הראשון לעתיד</div>
+            <p class="timeline__desc" data-i18n="timeline.i4_desc">לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית — חזון ברור לאנרגיה נקייה וחכמה.</p>
           </li>
         </ol>
       </div>
@@ -1391,9 +1437,9 @@
     <section class="team" id="team" aria-labelledby="team-heading">
       <div class="container">
         <header class="team__header">
-          <div class="section-tag">הצוות שלנו</div>
-          <h2 class="section-title" id="team-heading">האנשים מאחורי OgEnergy</h2>
-          <p class="section-lead">
+          <div class="section-tag" data-i18n="team.tag">הצוות שלנו</div>
+          <h2 class="section-title" id="team-heading" data-i18n="team.title">האנשים מאחורי OgEnergy</h2>
+          <p class="section-lead" data-i18n="team.lead">
             לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה.
           </p>
         </header>
@@ -1402,7 +1448,7 @@
 
           <!-- Person 1 -->
           <div class="team-card">
-            <button class="team-card__avatar-btn" aria-label="פתח פרופיל של אורן לוי" data-modal="modal-oren">
+            <button class="team-card__avatar-btn" data-i18n-aria="members.oren.avatar_aria" aria-label="פתח פרופיל של אורן לוי" data-modal="modal-oren">
               <div class="team-card__avatar team-card__avatar--1">
                 א.ל
                 <div class="team-card__avatar-overlay" aria-hidden="true">
@@ -1410,20 +1456,20 @@
                 </div>
               </div>
             </button>
-            <h3 class="team-card__name">אורן לוי</h3>
-            <div class="team-card__role">מנכ"ל ומייסד</div>
-            <p class="team-card__bio">
+            <h3 class="team-card__name" data-i18n="members.oren.name">אורן לוי</h3>
+            <div class="team-card__role" data-i18n="members.oren.role">מנכ"ל ומייסד</div>
+            <p class="team-card__bio" data-i18n="members.oren.bio">
               לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. ניחבה ליביבם נולום ארווס סאפיאן עולם.
             </p>
             <button class="team-card__more" data-modal="modal-oren">
-              קרא עוד
+              <span data-i18n="members.oren.more">קרא עוד</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
           </div>
 
           <!-- Person 2 -->
           <div class="team-card">
-            <button class="team-card__avatar-btn" aria-label="פתח פרופיל של מיכל כהן" data-modal="modal-michal">
+            <button class="team-card__avatar-btn" data-i18n-aria="members.michal.avatar_aria" aria-label="פתח פרופיל של מיכל כהן" data-modal="modal-michal">
               <div class="team-card__avatar team-card__avatar--2">
                 מ.כ
                 <div class="team-card__avatar-overlay" aria-hidden="true">
@@ -1431,13 +1477,13 @@
                 </div>
               </div>
             </button>
-            <h3 class="team-card__name">מיכל כהן</h3>
-            <div class="team-card__role">מנהלת טכנולוגיה ומוצר</div>
-            <p class="team-card__bio">
+            <h3 class="team-card__name" data-i18n="members.michal.name">מיכל כהן</h3>
+            <div class="team-card__role" data-i18n="members.michal.role">מנהלת טכנולוגיה ומוצר</div>
+            <p class="team-card__bio" data-i18n="members.michal.bio">
               קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני. דנש שמחת צחוק ניחבה ליביבם.
             </p>
             <button class="team-card__more" data-modal="modal-michal">
-              קרא עוד
+              <span data-i18n="members.michal.more">קרא עוד</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
           </div>
@@ -1457,13 +1503,13 @@
               <path d="M20 5L10 19h8l-4 10 14-16h-8l4-8z" fill="#fff"/>
             </svg>
           </div>
-          <h2 class="cta-section__title" id="cta-heading">מוכנים לחסוך באנרגיה?</h2>
-          <p class="cta-section__desc">
+          <h2 class="cta-section__title" id="cta-heading" data-i18n="cta.title">מוכנים לחסוך באנרגיה?</h2>
+          <p class="cta-section__desc" data-i18n="cta.desc">
             לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. ניחבה ליביבם נולום ארווס סאפיאן.
           </p>
           <div class="cta-section__actions">
             <a href="mailto:info@ogenergy.co.il" class="btn btn--white">
-              שלח לנו מייל
+              <span data-i18n="cta.email_btn">שלח לנו מייל</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </a>
             <a href="tel:+97235000000" class="btn btn--ghost">03-500-0000</a>
@@ -1478,20 +1524,20 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__inner">
-        <a href="#" class="logo-link" aria-label="חזור לראש הדף">
+        <a href="#" class="logo-link" data-i18n-aria="footer.back_aria" aria-label="חזור לראש הדף">
           <svg width="26" height="26" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <rect width="34" height="34" rx="9" fill="#f97316"/>
             <path d="M20 5L10 19h8l-4 10 14-16h-8l4-8z" fill="#fff"/>
           </svg>
           <span class="logo-wordmark" style="color:#fff;">Og<span>Energy</span></span>
         </a>
-        <p class="footer__copy">&copy; 2026 OgEnergy. כל הזכויות שמורות.</p>
+        <p class="footer__copy" data-i18n="footer.copy">&copy; 2026 OgEnergy. כל הזכויות שמורות.</p>
         <ul class="footer__links" role="list">
-          <li><a href="#about">אודות</a></li>
-          <li><a href="#services">שירותים</a></li>
-          <li><a href="#team">הצוות</a></li>
-          <li><a href="careers.html">קריירה</a></li>
-          <li><a href="#contact">צור קשר</a></li>
+          <li><a href="#about" data-i18n="nav.about">אודות</a></li>
+          <li><a href="#services" data-i18n="nav.services">שירותים</a></li>
+          <li><a href="#team" data-i18n="nav.team">הצוות</a></li>
+          <li><a href="careers.html" data-i18n="nav.careers">קריירה</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">צור קשר</a></li>
         </ul>
       </div>
     </div>
@@ -1501,24 +1547,24 @@
   <div class="modal" id="modal-oren" role="dialog" aria-modal="true" aria-labelledby="modal-oren-name" hidden>
     <div class="modal__backdrop"></div>
     <div class="modal__card">
-      <button class="modal__close" aria-label="סגור">
+      <button class="modal__close" data-i18n-aria="modal.close" aria-label="סגור">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
       <div class="modal__avatar modal__avatar--1" aria-hidden="true">א.ל</div>
-      <h2 class="modal__name" id="modal-oren-name">אורן לוי</h2>
-      <div class="modal__role">מנכ"ל ומייסד</div>
+      <h2 class="modal__name" id="modal-oren-name" data-i18n="members.oren.name">אורן לוי</h2>
+      <div class="modal__role" data-i18n="members.oren.role">מנכ"ל ומייסד</div>
       <hr class="modal__divider" />
-      <p class="modal__body">
+      <p class="modal__body" data-i18n="members.oren.modal_body1">
         לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה. דנש שמחת צחוק, בגורמה לוריק מורגנש ביאקוני. ימנחם ניחבה — קולורס מונחה ליברה שיושוס.
       </p>
-      <p class="modal__body">
+      <p class="modal__body" data-i18n="members.oren.modal_body2">
         ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מלרנצ. כאשר בלריק גראל טייס, ולתיק בלריק קונסקטטור.
       </p>
       <div class="modal__tags" aria-label="תחומי התמחות">
-        <span class="modal__tag">אסטרטגיה עסקית</span>
-        <span class="modal__tag">אנרגיה מתחדשת</span>
-        <span class="modal__tag">פיתוח עסקי</span>
-        <span class="modal__tag">ISO 50001</span>
+        <span class="modal__tag" data-i18n="members.oren.tag1">אסטרטגיה עסקית</span>
+        <span class="modal__tag" data-i18n="members.oren.tag2">אנרגיה מתחדשת</span>
+        <span class="modal__tag" data-i18n="members.oren.tag3">פיתוח עסקי</span>
+        <span class="modal__tag" data-i18n="members.oren.tag4">ISO 50001</span>
       </div>
       <div class="modal__contact">
         <a href="mailto:oren@ogenergy.co.il">
@@ -1537,24 +1583,24 @@
   <div class="modal" id="modal-michal" role="dialog" aria-modal="true" aria-labelledby="modal-michal-name" hidden>
     <div class="modal__backdrop"></div>
     <div class="modal__card">
-      <button class="modal__close" aria-label="סגור">
+      <button class="modal__close" data-i18n-aria="modal.close" aria-label="סגור">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
       <div class="modal__avatar modal__avatar--2" aria-hidden="true">מ.כ</div>
-      <h2 class="modal__name" id="modal-michal-name">מיכל כהן</h2>
-      <div class="modal__role">מנהלת טכנולוגיה ומוצר</div>
+      <h2 class="modal__name" id="modal-michal-name" data-i18n="members.michal.name">מיכל כהן</h2>
+      <div class="modal__role" data-i18n="members.michal.role">מנהלת טכנולוגיה ומוצר</div>
       <hr class="modal__divider" />
-      <p class="modal__body">
+      <p class="modal__body" data-i18n="members.michal.modal_body1">
         קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני. דנש שמחת צחוק, ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה.
       </p>
-      <p class="modal__body">
+      <p class="modal__body" data-i18n="members.michal.modal_body2">
         ולהאמית קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מלרנצ. כאשר בלריק גראל טייס, ולתיק בלריק קונסקטטור הלבנה. אדיפיסינג אלית ושבעגט ליבם סולגק נוסמן.
       </p>
       <div class="modal__tags" aria-label="תחומי התמחות">
-        <span class="modal__tag">פיתוח תוכנה</span>
-        <span class="modal__tag">IoT &amp; Smart Grid</span>
-        <span class="modal__tag">ניהול מוצר</span>
-        <span class="modal__tag">AI &amp; Data</span>
+        <span class="modal__tag" data-i18n="members.michal.tag1">פיתוח תוכנה</span>
+        <span class="modal__tag" data-i18n="members.michal.tag2">IoT &amp; Smart Grid</span>
+        <span class="modal__tag" data-i18n="members.michal.tag3">ניהול מוצר</span>
+        <span class="modal__tag" data-i18n="members.michal.tag4">AI &amp; Data</span>
       </div>
       <div class="modal__contact">
         <a href="mailto:michal@ogenergy.co.il">
@@ -1569,6 +1615,9 @@
     </div>
   </div>
 
+  <script src="i18n/translations.js"></script>
+  <script src="i18n/i18n.js"></script>
+
   <script>
     // Mobile nav toggle
     (function () {
@@ -1579,7 +1628,7 @@
       function closeNav() {
         mobileNav.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'פתח תפריט ניווט');
+        toggle.setAttribute('aria-label', toggle.getAttribute('data-open-label') || 'פתח תפריט ניווט');
       }
 
       toggle.addEventListener('click', function () {
@@ -1589,7 +1638,7 @@
         } else {
           mobileNav.classList.add('open');
           toggle.setAttribute('aria-expanded', 'true');
-          toggle.setAttribute('aria-label', 'סגור תפריט ניווט');
+          toggle.setAttribute('aria-label', toggle.getAttribute('data-close-label') || 'סגור תפריט ניווט');
         }
       });
 
