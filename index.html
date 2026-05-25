@@ -732,6 +732,295 @@
       flex-wrap: wrap;
     }
 
+    /* ── TEAM ───────────────────────────────────────────────────────── */
+    .team {
+      background: var(--color-surface);
+      padding-block: 6rem;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .team__header { text-align: center; margin-bottom: 4rem; }
+    .team__header .section-lead { margin-inline: auto; }
+
+    .team__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .team-card {
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    }
+    .team-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      border-color: rgba(249,115,22,.3);
+    }
+
+    .team-card__avatar-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 50%;
+      position: relative;
+      display: block;
+    }
+    .team-card__avatar-btn:focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 4px;
+    }
+
+    .team-card__avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.03em;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .team-card__avatar-btn:hover .team-card__avatar {
+      transform: scale(1.05);
+      box-shadow: 0 8px 28px rgba(249,115,22,.3);
+    }
+
+    .team-card__avatar--1 {
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      box-shadow: 0 6px 24px rgba(249,115,22,.35);
+    }
+    .team-card__avatar--2 {
+      background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+      box-shadow: 0 6px 24px rgba(15,23,42,.35);
+    }
+
+    .team-card__avatar-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .team-card__avatar-btn:hover .team-card__avatar-overlay,
+    .team-card__avatar-btn:focus-visible .team-card__avatar-overlay { opacity: 1; }
+    .team-card__avatar-overlay svg { color: #fff; }
+
+    .team-card__name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-foreground);
+      letter-spacing: -.02em;
+      margin: 0;
+    }
+    .team-card__role {
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .team-card__bio {
+      font-size: .9375rem;
+      color: var(--color-muted-text);
+      line-height: 1.65;
+    }
+    .team-card__more {
+      margin-top: .5rem;
+      background: none;
+      border: none;
+      color: var(--color-accent);
+      font-family: var(--font-base);
+      font-size: .9375rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: 0;
+      transition: gap var(--transition);
+    }
+    .team-card__more:hover { gap: .6rem; }
+    .team-card__more:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 2px; }
+
+    @media (max-width: 599px) {
+      .team__grid { grid-template-columns: 1fr; max-width: 380px; }
+    }
+
+    /* ── MODAL ──────────────────────────────────────────────────────── */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15,23,42,.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      cursor: pointer;
+    }
+
+    .modal__card {
+      position: relative;
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: 3rem 2.5rem 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,0,.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: .875rem;
+      transform: translateY(16px) scale(.97);
+      transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      max-height: 90dvh;
+      overflow-y: auto;
+    }
+    .modal.is-open .modal__card {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal__close {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: var(--color-muted);
+      color: var(--color-muted-text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+      transition: background var(--transition), color var(--transition);
+    }
+    .modal__close:hover { background: var(--color-border); color: var(--color-foreground); }
+    .modal__close:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    .modal__avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.875rem;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .modal__avatar--1 {
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      box-shadow: 0 6px 24px rgba(249,115,22,.35);
+    }
+    .modal__avatar--2 {
+      background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+      box-shadow: 0 6px 24px rgba(15,23,42,.35);
+    }
+
+    .modal__name {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      color: var(--color-foreground);
+      margin: 0;
+    }
+    .modal__role {
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .modal__divider {
+      width: 40px;
+      height: 3px;
+      background: var(--color-accent);
+      border-radius: var(--radius-full);
+      border: none;
+      margin: .25rem 0;
+    }
+    .modal__body {
+      font-size: .9375rem;
+      color: var(--color-muted-text);
+      line-height: 1.8;
+      text-align: right;
+    }
+    .modal__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      justify-content: center;
+      margin-top: .5rem;
+    }
+    .modal__tag {
+      background: rgba(249,115,22,.08);
+      color: var(--color-accent);
+      font-size: .8125rem;
+      font-weight: 700;
+      padding: .3rem .8rem;
+      border-radius: var(--radius-full);
+      letter-spacing: .02em;
+    }
+    .modal__contact {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: .5rem;
+    }
+    .modal__contact a {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--color-muted-text);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .modal__contact a:hover { color: var(--color-accent); }
+    .modal__contact a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 2px; }
+
     /* ── FOOTER ─────────────────────────────────────────────────────── */
     .footer {
       background: #070c18;
@@ -789,7 +1078,8 @@
           <ul class="nav__links" role="list">
             <li><a href="#about">אודות</a></li>
             <li><a href="#services">שירותים</a></li>
-            <li><a href="#experience">ניסיון</a></li>
+            <li><a href="#team">הצוות</a></li>
+            <li><a href="careers.html">קריירה</a></li>
             <li><a href="#contact" class="nav__cta">צור קשר</a></li>
           </ul>
 
@@ -803,10 +1093,11 @@
         </div>
 
         <div class="nav__mobile" id="mobile-nav" role="list">
-          <a href="#about"      role="listitem">אודות</a>
-          <a href="#services"   role="listitem">שירותים</a>
-          <a href="#experience" role="listitem">ניסיון</a>
-          <a href="#contact"    role="listitem">צור קשר</a>
+          <a href="#about"        role="listitem">אודות</a>
+          <a href="#services"     role="listitem">שירותים</a>
+          <a href="#team"         role="listitem">הצוות</a>
+          <a href="careers.html"  role="listitem">קריירה</a>
+          <a href="#contact"      role="listitem">צור קשר</a>
         </div>
       </div>
     </nav>
@@ -1095,6 +1386,65 @@
       </div>
     </section>
 
+    <!-- ── TEAM ─────────────────────────────────────────────────── -->
+    <section class="team" id="team" aria-labelledby="team-heading">
+      <div class="container">
+        <header class="team__header">
+          <div class="section-tag">הצוות שלנו</div>
+          <h2 class="section-title" id="team-heading">האנשים מאחורי OgEnergy</h2>
+          <p class="section-lead">
+            לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה.
+          </p>
+        </header>
+
+        <div class="team__grid">
+
+          <!-- Person 1 -->
+          <div class="team-card">
+            <button class="team-card__avatar-btn" aria-label="פתח פרופיל של אורן לוי" data-modal="modal-oren">
+              <div class="team-card__avatar team-card__avatar--1">
+                א.ל
+                <div class="team-card__avatar-overlay" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                </div>
+              </div>
+            </button>
+            <h3 class="team-card__name">אורן לוי</h3>
+            <div class="team-card__role">מנכ"ל ומייסד</div>
+            <p class="team-card__bio">
+              לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. ניחבה ליביבם נולום ארווס סאפיאן עולם.
+            </p>
+            <button class="team-card__more" data-modal="modal-oren">
+              קרא עוד
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <!-- Person 2 -->
+          <div class="team-card">
+            <button class="team-card__avatar-btn" aria-label="פתח פרופיל של מיכל כהן" data-modal="modal-michal">
+              <div class="team-card__avatar team-card__avatar--2">
+                מ.כ
+                <div class="team-card__avatar-overlay" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                </div>
+              </div>
+            </button>
+            <h3 class="team-card__name">מיכל כהן</h3>
+            <div class="team-card__role">מנהלת טכנולוגיה ומוצר</div>
+            <p class="team-card__bio">
+              קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני. דנש שמחת צחוק ניחבה ליביבם.
+            </p>
+            <button class="team-card__more" data-modal="modal-michal">
+              קרא עוד
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ── CTA ────────────────────────────────────────────────── -->
     <section class="cta-section" id="contact" aria-labelledby="cta-heading">
       <div class="container">
@@ -1138,11 +1488,85 @@
         <ul class="footer__links" role="list">
           <li><a href="#about">אודות</a></li>
           <li><a href="#services">שירותים</a></li>
+          <li><a href="#team">הצוות</a></li>
+          <li><a href="careers.html">קריירה</a></li>
           <li><a href="#contact">צור קשר</a></li>
         </ul>
       </div>
     </div>
   </footer>
+
+  <!-- ── MODAL: אורן לוי ──────────────────────────────────────── -->
+  <div class="modal" id="modal-oren" role="dialog" aria-modal="true" aria-labelledby="modal-oren-name" hidden>
+    <div class="modal__backdrop"></div>
+    <div class="modal__card">
+      <button class="modal__close" aria-label="סגור">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal__avatar modal__avatar--1" aria-hidden="true">א.ל</div>
+      <h2 class="modal__name" id="modal-oren-name">אורן לוי</h2>
+      <div class="modal__role">מנכ"ל ומייסד</div>
+      <hr class="modal__divider" />
+      <p class="modal__body">
+        לורם איפסום דולור סיט אמט, קונסקטטור אדיפיסינג אלית. סת אלמנקום ניסי נון ניבאה. דנש שמחת צחוק, בגורמה לוריק מורגנש ביאקוני. ימנחם ניחבה — קולורס מונחה ליברה שיושוס.
+      </p>
+      <p class="modal__body">
+        ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה ולהאמית קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מלרנצ. כאשר בלריק גראל טייס, ולתיק בלריק קונסקטטור.
+      </p>
+      <div class="modal__tags" aria-label="תחומי התמחות">
+        <span class="modal__tag">אסטרטגיה עסקית</span>
+        <span class="modal__tag">אנרגיה מתחדשת</span>
+        <span class="modal__tag">פיתוח עסקי</span>
+        <span class="modal__tag">ISO 50001</span>
+      </div>
+      <div class="modal__contact">
+        <a href="mailto:oren@ogenergy.co.il">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          oren@ogenergy.co.il
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MODAL: מיכל כהן ──────────────────────────────────────── -->
+  <div class="modal" id="modal-michal" role="dialog" aria-modal="true" aria-labelledby="modal-michal-name" hidden>
+    <div class="modal__backdrop"></div>
+    <div class="modal__card">
+      <button class="modal__close" aria-label="סגור">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal__avatar modal__avatar--2" aria-hidden="true">מ.כ</div>
+      <h2 class="modal__name" id="modal-michal-name">מיכל כהן</h2>
+      <div class="modal__role">מנהלת טכנולוגיה ומוצר</div>
+      <hr class="modal__divider" />
+      <p class="modal__body">
+        קולורס מונחה ליברה שיושוס, בגורמה לוריק מורגנש ביאקוני. דנש שמחת צחוק, ניחבה ליביבם נולום ארווס סאפיאן — עולם פרולוגמה הוא הדורגאמה.
+      </p>
+      <p class="modal__body">
+        ולהאמית קולהע צופעט למרקוח איבן איף, ברומץ כלרשט מלרנצ. כאשר בלריק גראל טייס, ולתיק בלריק קונסקטטור הלבנה. אדיפיסינג אלית ושבעגט ליבם סולגק נוסמן.
+      </p>
+      <div class="modal__tags" aria-label="תחומי התמחות">
+        <span class="modal__tag">פיתוח תוכנה</span>
+        <span class="modal__tag">IoT &amp; Smart Grid</span>
+        <span class="modal__tag">ניהול מוצר</span>
+        <span class="modal__tag">AI &amp; Data</span>
+      </div>
+      <div class="modal__contact">
+        <a href="mailto:michal@ogenergy.co.il">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          michal@ogenergy.co.il
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Mobile nav toggle
@@ -1174,6 +1598,81 @@
 
       document.addEventListener('click', function (e) {
         if (!toggle.contains(e.target) && !mobileNav.contains(e.target)) closeNav();
+      });
+    })();
+
+    // Modal system
+    (function () {
+      var openModal = null;
+      var lastFocused = null;
+
+      function getFocusable(modal) {
+        return Array.from(modal.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )).filter(function (el) { return !el.disabled; });
+      }
+
+      function trapFocus(e, modal) {
+        var focusable = getFocusable(modal);
+        var first = focusable[0];
+        var last  = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        }
+      }
+
+      function onKeydown(e) {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'Tab' && openModal) trapFocus(e, openModal);
+      }
+
+      function openModalById(id) {
+        var modal = document.getElementById(id);
+        if (!modal) return;
+        lastFocused = document.activeElement;
+        openModal = modal;
+        modal.removeAttribute('hidden');
+        // Force reflow for animation
+        modal.getBoundingClientRect();
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        var firstFocusable = getFocusable(modal)[0];
+        if (firstFocusable) firstFocusable.focus();
+        document.addEventListener('keydown', onKeydown);
+      }
+
+      function closeModal() {
+        if (!openModal) return;
+        var modal = openModal;
+        openModal = null;
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onKeydown);
+        modal.addEventListener('transitionend', function handler() {
+          modal.setAttribute('hidden', '');
+          modal.removeEventListener('transitionend', handler);
+        }, { once: true });
+        if (lastFocused) lastFocused.focus();
+        lastFocused = null;
+      }
+
+      // Open triggers (avatar buttons + "read more" buttons)
+      document.querySelectorAll('[data-modal]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openModalById(btn.getAttribute('data-modal'));
+        });
+      });
+
+      // Close buttons inside modals
+      document.querySelectorAll('.modal__close').forEach(function (btn) {
+        btn.addEventListener('click', closeModal);
+      });
+
+      // Backdrop click
+      document.querySelectorAll('.modal__backdrop').forEach(function (backdrop) {
+        backdrop.addEventListener('click', closeModal);
       });
     })();
 
